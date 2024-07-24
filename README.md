@@ -40,7 +40,7 @@ Packages required for running `data_code/data-gnomad_assign-B.py` can be found i
 
 If you are an external researcher with access to the **Genomics England Research Environment** and wish to run certain scripts in the `data_code` folder in this respository, please note that certain datasets and files are currently **_unavailable_** to external researchers.   
 
-Note, however, files generated from these datasets are available in the relevant subfolders of the `TBC` directory in the **Genomics England Research Environment**. Furthermore, permission arguments can be set so that all code in the `data_code` can be run without access to these original datasets (however, outputs will differ from that in the paper.)
+Note, however, files generated from these datasets are available in the relevant subfolders of the `TBC` directory in the **Genomics England Research Environment**, enabling full replication of the results. Furthermore, permission arguments can be set so that all code in the `data_code` can be run without access to these original datasets (however, outputs will differ from that in the paper.)
 
 #### The COVID-19 Cohort Dataset
 
