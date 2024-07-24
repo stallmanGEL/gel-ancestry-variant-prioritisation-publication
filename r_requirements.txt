@@ -1,0 +1,17 @@
+tidyverse
+data.table
+parallel
+Rlabkey
+bignspr
+magrittr
+umap
+broom
+MASS
+car
+DescTools
+ggforce
+ggplotify
+packedcircles
+ggdist
+gghalves
+cowplot
