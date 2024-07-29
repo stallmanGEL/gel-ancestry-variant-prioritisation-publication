@@ -688,8 +688,8 @@ tiering_data <- fread(paste0(out_dir, "labkey_data/tiering_data.csv.gz")) %>%
   add_varkey()
 
 ####### gnomADv3 GIA assignments
-gnomad_assignments_only_data <- read_tsv(paste0(out_dir, "ancestry_data/gnomad_assignments.tsv",
-                                         col_names = FALSE)) %>%
+gnomad_assignments_only_data <- read_tsv(paste0(out_dir, "ancestry_data/gnomad_assignments.tsv"),
+                                         col_names = FALSE) %>%
   dplyr::select(X1, X3) %>%
   rename(platekey = X1, participant_gnomad_category = X3) ## sort this out
 
@@ -741,7 +741,7 @@ if (args[2] == "COVID_ACCESS") {
 ##-------------------------------------------------------------------------
 
 #### gnomADv2 AFs for tiered variants
-tiering_frequency_gnomadv2_data <- fread(paste0(out_dir, "gnomad_afs_data/gnomad_v2_exomes_tiering.afs.gz", fill = TRUE)) %>%
+tiering_frequency_gnomadv2_data <- fread(paste0(out_dir, "gnomad_afs_data/gnomad_v2_exomes_tiering.afs.gz"), fill = TRUE) %>%
   filter(filter == "PASS") %>%
   mutate(chromosome = gsub("chr", "", chromosome),
          AC_oth_gnomad_v2 = as.integer(AC_oth_gnomad_v2),
@@ -758,7 +758,7 @@ tiering_frequency_gnomadv2_data <- fread(paste0(out_dir, "gnomad_afs_data/gnomad
   dplyr::select(varkey, contains("AF_"))
 
 #### gnomADv3 genomes for modernisation
-tiering_frequency_gnomadv3_data <- fread(paste0(out_dir, "gnomad_afs_data/gnomad_v3_genomes_tiering.afs.gz", fill = TRUE)) %>%
+tiering_frequency_gnomadv3_data <- fread(paste0(out_dir, "gnomad_afs_data/gnomad_v3_genomes_tiering.afs.gz"), fill = TRUE) %>%
   filter(filter == "PASS") %>%
   mutate(chromosome = gsub("chr", "", chromosome),
          AF_nfe_gnomad_v3 = AC_nfe_gnomad_v3 / AN_nfe_gnomad_v3,
