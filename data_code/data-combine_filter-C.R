@@ -684,7 +684,7 @@ if (args[2] == "COVID_ACCESS") {
 ##-------------------------------------------------------------------------
 
 ###### Tiering data (LabKey)
-tiering_data <- fread(paste0(out_dir, "labkey_data/tiering_data.csv.gz")) %>%
+tiering_data <- read_tsv(paste0(out_dir, "labkey_data/tiering_data.csv.gz")) %>%
   add_varkey()
 
 ####### gnomADv3 GIA assignments
@@ -694,14 +694,14 @@ gnomad_assignments_only_data <- read_tsv(paste0(out_dir, "ancestry_data/gnomad_a
   rename(platekey = X1, participant_gnomad_category = X3) ## sort this out
 
 ##### Phenotypes
-phenotypes_data <- fread(paste0(out_dir, "labkey_data/phenotypes_data.csv.gz"))
+phenotypes_data <- read_csv(paste0(out_dir, "labkey_data/phenotypes_data.csv.gz"))
 phenotypes_nejm_data <- read_csv("../public_data/phenotypes_nejm.csv")
 
 ##### Panel Meta Data
-panels_meta_data <- fread(paste0(out_dir, "panel_app_data/panel_app_meta_data.csv.gz"))
+panels_meta_data <- read_csv(paste0(out_dir, "panel_app_data/panel_app_meta_data.csv.gz"))
 
 #### ROH data
-roh_data <- fread(paste0(out_dir, "roh_data/roh_data.csv.gz"))
+roh_data <- read_csv(paste0(out_dir, "roh_data/roh_data.csv.gz"))
 
 ### Combine all data...
 meta_combined_data <- meta_data %>%
