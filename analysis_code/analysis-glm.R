@@ -20,6 +20,17 @@ library(MASS)
 ###########################################################################
 ###########################################################################
 
+add_varkey <- function(data, varid = TRUE) {
+  data <- data %>%
+    mutate(varkey = paste0("chr", chromosome, ":",
+                           position, "_", reference, "_", alternate))
+  if (varid) {
+    data <- data %>%
+      mutate(varid = paste0(participant_id, "_", varkey))
+  }
+  return(data)
+}
+
 tiering_frequency_filter <- function(tiers, freq_data, rarity = "all") {
   ### Filtering thresholds are defined by the Rare Disease Guide
   variants_ultra_rare <- freq_data %>%
