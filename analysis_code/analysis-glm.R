@@ -493,10 +493,10 @@ nrow(probands_meta_combined_data)
 ### 29,425 families / probands
 
 #### Tiering frequency data
-tiering_frequency_data <- fread(paste0(out_dir, "combined_data/combined_tiering_frequency_data.csv.gz"))
+tiering_frequency_data <- read_csv(paste0(out_dir, "combined_data/combined_tiering_frequency_data.csv.gz"))
 
 #### Tiering data for probands (filtered)
-tiering_probands_filtered_data <- fread(paste0(out_dir, "combined_data/filtered_retiering_probands_data.csv.gz")) %>%
+tiering_probands_filtered_data <- read_csv(paste0(out_dir, "combined_data/filtered_retiering_probands_data.csv.gz")) %>%
   filter(participant_id %in% probands_meta_combined_data$participant_id)
 
 #### Only ultra-rare variants (exclude those >0.01% frequency in gnomAD)
@@ -509,7 +509,7 @@ tiering_probands_rare <- tiering_probands_filtered_data %>%
   tiering_frequency_filter(tiering_frequency_data, "rare")
 
 #### Annotate tiering with Pathogenicity predictions...
-predictions_data <- fread(paste0(out_dir, "combined_data/combined_predictions_data.csv.gz")) %>%
+predictions_data <- read_csv(paste0(out_dir, "combined_data/combined_predictions_data.csv.gz")) %>%
   rename(CADD_score = CADD_PHRED)
 
 ### Annotate with AlphaMissense
