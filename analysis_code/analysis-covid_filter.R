@@ -17,6 +17,17 @@ source("../config/config.R")
 ###########################################################################
 ###########################################################################
 
+add_varkey <- function(data, varid = TRUE) {
+  data <- data %>%
+    mutate(varkey = paste0("chr", chromosome, ":",
+                           position, "_", reference, "_", alternate))
+  if (varid) {
+    data <- data %>%
+      mutate(varid = paste0(participant_id, "_", varkey))
+  }
+  return(data)
+}
+
 acmg_tiers_adder <- function(exit, tiers, dd = FALSE,
                              exclude_variants = NULL,
                              diagnosis_definition = c("yes", "partially")) {
@@ -184,10 +195,10 @@ nrow(probands_meta_combined_data)
 ### 29,425 families / probands
 
 #### Tiering frequency data
-tiering_frequency_data <- fread(paste0(out_dir, "combined_data/combined_tiering_frequency_data.csv.gz"))
+tiering_frequency_data <- read_csv(paste0(out_dir, "combined_data/combined_tiering_frequency_data.csv.gz"))
 
 #### Tiering data for probands (filtered)
-tiering_probands_filtered_data <- fread(paste0(out_dir, "combined_data/filtered_retiering_probands_data.csv.gz")) %>%
+tiering_probands_filtered_data <- read_csv(paste0(out_dir, "combined_data/filtered_retiering_probands_data.csv.gz")) %>%
   filter(participant_id %in% probands_meta_combined_data$participant_id)
 
 #### Only ultra-rare variants (exclude those >0.01% frequency in gnomAD)
@@ -201,7 +212,7 @@ tiering_probands_miss <- tiering_probands_filtered_data %>%
   tiering_frequency_filter(tiering_frequency_data, "missing")
 
 ### COVID AFs for Tiered variants
-covid_afs <- fread(paste0(out_dir, "covid_afs_data/aggCOVID_tiering.acount.gz")) %>%
+covid_afs <- read_tsv(paste0(out_dir, "covid_afs_data/aggCOVID_tiering.acount.gz")) %>%
   rename(varkey = ID) %>%
   mutate(total_OBS_CTS = dplyr::select(., ends_with("OBS_CTS")) %>% rowSums(na.rm = TRUE),
          total_ALT_CTS = dplyr::select(., ends_with("ALT_CTS")) %>% rowSums(na.rm = TRUE),
